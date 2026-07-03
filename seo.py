@@ -15,7 +15,7 @@ import pathlib
 ROOT = pathlib.Path(__file__).parent
 
 # ── EDIT ME once you register a domain, then re-run this script ──────────────
-DOMAIN = "https://www.arismobiledetailing.com"   # PLACEHOLDER — no trailing slash
+DOMAIN = "https://arismobiledetailing.com"   # live custom domain — no trailing slash
 # ────────────────────────────────────────────────────────────────────────────
 
 BUSINESS = "Ari's Mobile Detailing"
@@ -40,7 +40,11 @@ AREA = ("0.7", "monthly")
 
 
 def page_url(fname):
-    return DOMAIN + ("/" if fname == "index.html" else f"/{fname}")
+    # Cloudflare serves clean URLs (/packages, not /packages.html), so canonical
+    # + sitemap URLs drop the .html to match the served, redirect-free address.
+    if fname == "index.html":
+        return DOMAIN + "/"
+    return DOMAIN + "/" + fname[:-5]  # strip ".html"
 
 
 def esc(s):
@@ -82,7 +86,9 @@ def local_business_jsonld():
 
 
 def seo_block(title, desc, url):
-    t, d = esc(title), esc(desc)
+    # title/desc are extracted from <title>/<meta> which are ALREADY HTML-escaped,
+    # so use them as-is (re-escaping would double-encode & -> &amp;amp;).
+    t, d = title, desc
     return "\n".join([
         '<!-- SEO:start (managed by seo.py) -->',
         f'<link rel="canonical" href="{url}" />',
