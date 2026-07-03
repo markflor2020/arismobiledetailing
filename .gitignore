@@ -1,0 +1,26 @@
+# macOS
+.DS_Store
+._*
+.Spotlight-V100
+.Trashes
+.AppleDouble
+
+# Editor / IDE
+.vscode/
+.idea/
+*.swp
+*~
+
+# Logs & temp
+*.log
+tmp/
+.cache/
+
+# Python (helper scripts: generate_areas.py, seo.py, serve.py)
+__pycache__/
+*.pyc
+.venv/
+venv/
+
+# Node (not used now, but in case a build step is added later)
+node_modules/
