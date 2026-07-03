@@ -1,5 +1,9 @@
-# Files that shouldn't be served publicly (dev/build helpers, docs, config).
-# Dotfiles (.git, .gitignore, .claude, .assetsignore) are ignored automatically.
+# Not part of the public site — exclude from what Cloudflare serves.
+.git/
+.wrangler/
+.claude/
+.gitignore
+.assetsignore
+wrangler.toml
 *.py
 *.md
-wrangler.toml
