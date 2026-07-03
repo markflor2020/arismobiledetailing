@@ -1,0 +1,5 @@
+# Files that shouldn't be served publicly (dev/build helpers, docs, config).
+# Dotfiles (.git, .gitignore, .claude, .assetsignore) are ignored automatically.
+*.py
+*.md
+wrangler.toml
