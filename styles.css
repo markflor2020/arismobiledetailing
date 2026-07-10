@@ -423,6 +423,9 @@ a.contact__v:hover{color:var(--red-bright)}
 .qform__done h3{font-family:var(--display);font-weight:600;font-size:1.5rem}
 .qform__done p{color:var(--muted);max-width:26rem}
 .qform__done a{color:var(--red-bright);font-weight:600}
+/* the [hidden] attribute must win over .qform{display:flex} (else the success
+   panel shows before submit) */
+[hidden]{display:none!important}
 
 /* ───────── cursor spotlight glow (ported from the React GlowCard effect) ─────────
    A crimson radial spotlight + glowing border that track the pointer. JS sets the
