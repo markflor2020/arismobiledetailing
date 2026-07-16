@@ -34,7 +34,7 @@ REVIEWS = [
 ]
 
 # sitemap priority / changefreq by page
-PRIORITY = {"index.html": ("1.0", "weekly")}
+PRIORITY = {"index.html": ("1.0", "weekly"), "privacy.html": ("0.2", "yearly")}
 DEFAULT_MAIN = ("0.8", "monthly")
 AREA = ("0.7", "monthly")
 

@@ -116,8 +116,6 @@ def shell(title, desc, body, active):
 <title>{title}</title>
 <meta name="description" content="{desc}" />
 <link rel="icon" href="assets/logo.svg" />
-<link rel="preconnect" href="https://api.fontshare.com" crossorigin />
-<link href="https://api.fontshare.com/v2/css?f[]=clash-display@400,500,600,700&f[]=switzer@300,400,500,600,700&f[]=cabinet-grotesk@700,800,900&display=swap" rel="stylesheet" />
 <link rel="stylesheet" href="styles.css" />
 </head>
 <body data-page="areas">
@@ -181,7 +179,7 @@ def shell(title, desc, body, active):
   </div>
 {footer_areas()}
   <div class="wrap footer__base">
-    <span>© <span id="year">2026</span> Ari's Mobile Detailing. All rights reserved.</span>
+    <span>© <span id="year">2026</span> Ari's Mobile Detailing. All rights reserved. · <a href="privacy.html">Privacy Policy</a></span>
     <span class="footer__made">Showroom shine, driveway convenience.</span>
   </div>
 </footer>

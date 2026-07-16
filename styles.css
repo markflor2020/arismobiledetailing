@@ -1,3 +1,13 @@
+/* Self-hosted fonts (no third-party requests). Downloaded from Fontshare. */
+@font-face{font-family:'Clash Display';src:url('assets/fonts/clash-display-400.woff2') format('woff2');font-weight:400;font-style:normal;font-display:swap}
+@font-face{font-family:'Clash Display';src:url('assets/fonts/clash-display-500.woff2') format('woff2');font-weight:500;font-style:normal;font-display:swap}
+@font-face{font-family:'Clash Display';src:url('assets/fonts/clash-display-600.woff2') format('woff2');font-weight:600;font-style:normal;font-display:swap}
+@font-face{font-family:'Clash Display';src:url('assets/fonts/clash-display-700.woff2') format('woff2');font-weight:700;font-style:normal;font-display:swap}
+@font-face{font-family:'Switzer';src:url('assets/fonts/switzer-400.woff2') format('woff2');font-weight:400;font-style:normal;font-display:swap}
+@font-face{font-family:'Switzer';src:url('assets/fonts/switzer-500.woff2') format('woff2');font-weight:500;font-style:normal;font-display:swap}
+@font-face{font-family:'Switzer';src:url('assets/fonts/switzer-600.woff2') format('woff2');font-weight:600;font-style:normal;font-display:swap}
+@font-face{font-family:'Switzer';src:url('assets/fonts/switzer-700.woff2') format('woff2');font-weight:700;font-style:normal;font-display:swap}
+
 /* =========================================================
    Ari's Mobile Detailing — premium automotive, dark navy
    ========================================================= */
@@ -28,7 +38,7 @@
 
   --maxw:        1180px;
 
-  --display: "Clash Display","Cabinet Grotesk",sans-serif;
+  --display: "Clash Display",sans-serif;
   --body:    "Switzer", ui-sans-serif, system-ui, sans-serif;
 }
 
@@ -427,6 +437,21 @@ a.contact__v:hover{color:var(--red-bright)}
    panel shows before submit) */
 [hidden]{display:none!important}
 
+/* ───────── long-form / legal prose (privacy policy) ───────── */
+.prose{max-width:52rem;margin:0 auto}
+.prose h2{font-size:clamp(1.45rem,2.6vw,1.85rem);margin:2.4rem 0 .8rem;letter-spacing:-.02em}
+.prose h3{font-family:var(--display);font-weight:600;font-size:1.1rem;margin:1.6rem 0 .5rem;color:var(--ink)}
+.prose p{color:var(--muted);margin-bottom:1rem;font-size:1.02rem;line-height:1.75}
+.prose ul{margin:0 0 1.3rem;padding:0;list-style:none;display:flex;flex-direction:column;gap:.6rem}
+.prose li{position:relative;padding-left:1.5rem;color:var(--muted);line-height:1.7}
+.prose li::before{content:"";position:absolute;left:0;top:.62em;width:6px;height:6px;border-radius:50%;background:var(--red-bright)}
+.prose strong{color:var(--ink);font-weight:600}
+.prose a{color:var(--red-bright);font-weight:600}
+.prose__callout{background:linear-gradient(180deg,var(--panel),var(--panel-2));border:1px solid var(--line);
+  border-left:3px solid var(--red);border-radius:var(--radius);padding:1.7rem 1.9rem;margin-bottom:2.6rem}
+.prose__callout h2{margin-top:0;font-size:1.3rem}
+.prose__callout ul{margin-bottom:0}
+
 /* ───────── cursor spotlight glow (ported from the React GlowCard effect) ─────────
    A crimson radial spotlight + glowing border that track the pointer. JS sets the
    global --x/--y (viewport px); background-attachment:fixed lets one set of vars
@@ -473,6 +498,8 @@ a.contact__v:hover{color:var(--red-bright)}
 .footer__areas-all{color:var(--red-bright)!important;font-weight:600}
 .footer__base{display:flex;align-items:center;justify-content:space-between;gap:1rem;flex-wrap:wrap;
   padding-top:22px;color:var(--muted-dim);font-size:.82rem}
+.footer__base a{color:var(--muted);font-weight:500}
+.footer__base a:hover{color:var(--red-bright)}
 
 /* =========================================================
    STICKY MOBILE BAR
