@@ -1,0 +1,6 @@
+# Canonicalize the hostname: send www -> apex (non-www) with a permanent 301.
+# Without this, www.arismobiledetailing.com/* serves the same pages at HTTP 200,
+# and Google files every www URL under "Alternate page with proper canonical tag."
+# :splat preserves the rest of the path. Apex then handles .html/trailing-slash
+# normalization via Cloudflare's built-in 307s.
+https://www.arismobiledetailing.com/* https://arismobiledetailing.com/:splat 301
