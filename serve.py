@@ -17,6 +17,26 @@ from http.server import HTTPServer, SimpleHTTPRequestHandler
 
 
 class NoCacheHandler(SimpleHTTPRequestHandler):
+    def _rewrite_clean_url(self):
+        # Mirror Cloudflare: serve /services from services.html so the clean,
+        # extensionless URLs used in internal links resolve in local dev too.
+        path = self.path.split("?", 1)[0].split("#", 1)[0]
+        if path in ("", "/") or path.endswith("/"):
+            return
+        if "." in path.rsplit("/", 1)[-1]:
+            return  # already has an extension (asset or explicit .html)
+        rel = path.lstrip("/") + ".html"
+        if os.path.isfile(os.path.join(os.getcwd(), rel)):
+            self.path = "/" + rel
+
+    def do_GET(self):
+        self._rewrite_clean_url()
+        super().do_GET()
+
+    def do_HEAD(self):
+        self._rewrite_clean_url()
+        super().do_HEAD()
+
     def end_headers(self):
         self.send_header("Cache-Control", "no-store, no-cache, must-revalidate, max-age=0")
         self.send_header("Pragma", "no-cache")

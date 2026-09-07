@@ -59,13 +59,13 @@ CITIES = [
 ]
 
 NAV_ITEMS = [
-    ("Home", "index.html"),
-    ("Services", "services.html"),
-    ("Packages", "packages.html"),
-    ("Results", "results.html"),
-    ("Areas", "areas.html"),
-    ("Reviews", "reviews.html"),
-    ("Contact", "contact.html"),
+    ("Home", "/"),
+    ("Services", "services"),
+    ("Packages", "packages"),
+    ("Results", "results"),
+    ("Areas", "areas"),
+    ("Reviews", "reviews"),
+    ("Contact", "contact"),
 ]
 
 CHEV_PHONE = '<svg viewBox="0 0 24 24" class="ico" aria-hidden="true"><path d="M13.8 16.6a1 1 0 0 0 1.2-.3l.4-.5a2 2 0 0 1 1.6-.8h3a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2A18 18 0 0 1 2 4a2 2 0 0 1 2-2h3a2 2 0 0 1 2 2v3a2 2 0 0 1-.8 1.6l-.5.4a1 1 0 0 0-.3 1.2 14 14 0 0 0 6.4 6.4"/></svg>'
@@ -95,14 +95,14 @@ def footer_nav():
 
 def footer_areas():
     links = "\n".join(
-        f'      <a href="detailing-{slug}.html">{name}</a>'
+        f'      <a href="detailing-{slug}">{name}</a>'
         for name, slug, *_ in CITIES
     )
     return f"""  <div class="wrap footer__areas">
     <span class="footer__areas-label">Areas we serve</span>
     <nav class="footer__areas-links" aria-label="Service areas">
 {links}
-      <a href="areas.html" class="footer__areas-all">All areas →</a>
+      <a href="areas" class="footer__areas-all">All areas →</a>
     </nav>
   </div>"""
 
@@ -134,7 +134,7 @@ def shell(title, desc, body, active):
 
 <header class="header" id="top">
   <div class="wrap header__inner">
-    <a class="brand" href="index.html" aria-label="Ari's Mobile Detailing — home">
+    <a class="brand" href="/" aria-label="Ari's Mobile Detailing — home">
       <span class="brand__medallion"><img src="assets/logo.svg" alt="" width="44" height="44" /></span>
       <span class="brand__name">
         <span class="brand__line1">Ari's <em>Mobile</em></span>
@@ -146,7 +146,7 @@ def shell(title, desc, body, active):
     </nav>
     <div class="header__cta">
       <a class="btn btn--ghost" href="tel:{PHONE}">{CHEV_PHONE}<span>Call</span></a>
-      <a class="btn btn--red" href="contact.html">Get a Quote</a>
+      <a class="btn btn--red" href="contact">Get a Quote</a>
     </div>
     <button class="burger" id="burger" aria-label="Open menu" aria-expanded="false"><span></span><span></span><span></span></button>
   </div>
@@ -157,7 +157,7 @@ def shell(title, desc, body, active):
 {drawer(active)}
   </nav>
   <div class="drawer__cta">
-    <a class="btn btn--red btn--block" href="contact.html">Get a Quote</a>
+    <a class="btn btn--red btn--block" href="contact">Get a Quote</a>
     <a class="btn btn--ghost btn--block" href="tel:{PHONE}">Call (402) 515-9157</a>
   </div>
 </div>
@@ -179,7 +179,7 @@ def shell(title, desc, body, active):
   </div>
 {footer_areas()}
   <div class="wrap footer__base">
-    <span>© <span id="year">2026</span> Ari's Mobile Detailing. All rights reserved. · <a href="privacy.html">Privacy Policy</a></span>
+    <span>© <span id="year">2026</span> Ari's Mobile Detailing. All rights reserved. · <a href="privacy">Privacy Policy</a></span>
     <span class="footer__made">Showroom shine, driveway convenience.</span>
   </div>
 </footer>
@@ -187,7 +187,7 @@ def shell(title, desc, body, active):
 <div class="mobar">
   <a class="mobar__btn" href="sms:{PHONE}"><svg viewBox="0 0 24 24" class="ico" aria-hidden="true"><path d="M22 17a2 2 0 0 1-2 2H6.8a2 2 0 0 0-1.4.6l-2.2 2.2A.7.7 0 0 1 2 21.3V5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2z"/></svg>Text</a>
   <a class="mobar__btn" href="tel:{PHONE}">{CHEV_PHONE}Call</a>
-  <a class="mobar__btn mobar__btn--red" href="contact.html"><svg viewBox="0 0 24 24" class="ico" aria-hidden="true"><path d="M8 2v4M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg>Quote</a>
+  <a class="mobar__btn mobar__btn--red" href="contact"><svg viewBox="0 0 24 24" class="ico" aria-hidden="true"><path d="M8 2v4M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg>Quote</a>
 </div>
 
 <script src="script.js"></script>
@@ -199,7 +199,7 @@ def shell(title, desc, body, active):
 def city_page(name, slug, blurb, blurb2, nearby):
     body = f"""<section class="phero">
   <div class="wrap phero__inner">
-    <nav class="crumbs" aria-label="Breadcrumb"><a href="index.html">Home</a><a href="areas.html">Areas</a><span>{name}</span></nav>
+    <nav class="crumbs" aria-label="Breadcrumb"><a href="/">Home</a><a href="areas">Areas</a><span>{name}</span></nav>
     <span class="eyebrow reveal" data-d="0">Service area</span>
     <h1 class="phero__title reveal" data-d="1">Mobile Auto Detailing in {name}, NE</h1>
     <p class="phero__sub reveal" data-d="2">{blurb}</p>
@@ -219,7 +219,7 @@ def city_page(name, slug, blurb, blurb2, nearby):
         <span>{CHECK}Fully insured &amp; eco-friendly products</span>
         <span>{CHECK}Quote back within the hour</span>
       </div>
-      <a class="btn btn--red btn--lg" href="contact.html">Get a quote in {name}</a>
+      <a class="btn btn--red btn--lg" href="contact">Get a quote in {name}</a>
     </div>
     <aside class="area__card reveal" data-d="1">
       <h3>What we offer in {name}</h3>
@@ -230,8 +230,8 @@ def city_page(name, slug, blurb, blurb2, nearby):
         <li>Engine bay detailing</li>
         <li>Maintenance plans from $30/wash</li>
       </ul>
-      <a class="btn btn--ghost btn--block" href="services.html">See all services</a>
-      <a class="btn btn--ghost btn--block" href="packages.html">View packages &amp; pricing</a>
+      <a class="btn btn--ghost btn--block" href="services">See all services</a>
+      <a class="btn btn--ghost btn--block" href="packages">View packages &amp; pricing</a>
     </aside>
   </div>
 </section>
@@ -243,7 +243,7 @@ def city_page(name, slug, blurb, blurb2, nearby):
       <div class="reviews__score">5.0</div>
       <div class="reviews__stars" aria-hidden="true">★★★★★</div>
       <p class="reviews__meta">Rated 5.0 by drivers across the Omaha metro.</p>
-      <a class="btn btn--ghost" href="reviews.html">Read the reviews {ARROW}</a>
+      <a class="btn btn--ghost" href="reviews">Read the reviews {ARROW}</a>
     </div>
     <figure class="quote quote--feature reveal" data-d="1">
       <div class="quote__stars" aria-hidden="true">★★★★★</div>
@@ -258,7 +258,7 @@ def city_page(name, slug, blurb, blurb2, nearby):
     <h2 class="sec-title">Ready for a spotless ride in <span class="text-red">{name}?</span></h2>
     <p>Text us your vehicle and we'll come to you anywhere in {name} — with a tailored quote back within the hour.</p>
     <div class="cta-band__actions">
-      <a class="btn btn--red btn--lg" href="contact.html">Get a quote</a>
+      <a class="btn btn--red btn--lg" href="contact">Get a quote</a>
       <a class="btn btn--ghost btn--lg" href="tel:{PHONE}">Call (402) 515-9157</a>
     </div>
   </div>
@@ -266,13 +266,13 @@ def city_page(name, slug, blurb, blurb2, nearby):
 </main>"""
     title = f"Mobile Auto Detailing in {name}, NE — Ari's Mobile Detailing"
     desc = f"Mobile auto detailing in {name}, NE. Interior & exterior detailing, ceramic coating, paint correction & maintenance plans — done at your home or office. Quote within the hour."
-    return shell(title, desc, body, "areas.html")
+    return shell(title, desc, body, "areas")
 
 
 def hub_page():
     cards = []
     for name, slug, blurb, *_ in CITIES:
-        cards.append(f"""      <a class="area-card spotlight reveal" href="detailing-{slug}.html">
+        cards.append(f"""      <a class="area-card spotlight reveal" href="detailing-{slug}">
         <h3>{name}, NE</h3>
         <p>{blurb}</p>
         <span class="teaser__cta">View {name} {ARROW}</span>
@@ -280,10 +280,10 @@ def hub_page():
     grid = "\n".join(cards)
     body = f"""<section class="phero">
   <div class="wrap phero__inner">
-    <nav class="crumbs" aria-label="Breadcrumb"><a href="index.html">Home</a><span>Areas</span></nav>
+    <nav class="crumbs" aria-label="Breadcrumb"><a href="/">Home</a><span>Areas</span></nav>
     <span class="eyebrow reveal" data-d="0">Where we work</span>
     <h1 class="phero__title reveal" data-d="1">Areas we serve across the Omaha metro.</h1>
-    <p class="phero__sub reveal" data-d="2">Ari's Mobile Detailing is 100% mobile — we bring the detailing shop to driveways all over the metro. Find your city below, or just <a href="contact.html">text us</a> and ask.</p>
+    <p class="phero__sub reveal" data-d="2">Ari's Mobile Detailing is 100% mobile — we bring the detailing shop to driveways all over the metro. Find your city below, or just <a href="contact">text us</a> and ask.</p>
   </div>
 </section>
 
@@ -301,7 +301,7 @@ def hub_page():
     <h2 class="sec-title">Don't see your town?</h2>
     <p>We cover the whole Omaha metro and beyond. If you're nearby, there's a good chance we'll come to you — just ask.</p>
     <div class="cta-band__actions">
-      <a class="btn btn--red btn--lg" href="contact.html">Get a quote</a>
+      <a class="btn btn--red btn--lg" href="contact">Get a quote</a>
       <a class="btn btn--ghost btn--lg" href="tel:{PHONE}">Call (402) 515-9157</a>
     </div>
   </div>
@@ -309,7 +309,7 @@ def hub_page():
 </main>"""
     title = "Areas We Serve — Mobile Detailing Across the Omaha Metro | Ari's Mobile Detailing"
     desc = "Ari's Mobile Detailing serves Omaha, Bellevue, Papillion, La Vista, Elkhorn, Gretna, Bennington, Ralston, Millard and Yutan, NE. Mobile detailing that comes to you."
-    return shell(title, desc, body, "areas.html")
+    return shell(title, desc, body, "areas")
 
 
 def patch_existing_nav():
@@ -317,14 +317,14 @@ def patch_existing_nav():
     pages = ["index.html", "services.html", "packages.html",
              "results.html", "reviews.html", "contact.html"]
     # match a Results anchor on its own line, capturing its indentation
-    pat = re.compile(r'^([ \t]*)(<a href="results\.html"[^>]*>Results</a>)$', re.M)
+    pat = re.compile(r'^([ \t]*)(<a href="results"[^>]*>Results</a>)$', re.M)
     for p in pages:
         fp = ROOT / p
         html = fp.read_text()
-        if 'href="areas.html"' in html:
+        if 'href="areas"' in html:
             print(f"  {p}: already has Areas link, skipping")
             continue
-        html = pat.sub(lambda m: f'{m.group(1)}{m.group(2)}\n{m.group(1)}<a href="areas.html">Areas</a>', html)
+        html = pat.sub(lambda m: f'{m.group(1)}{m.group(2)}\n{m.group(1)}<a href="areas">Areas</a>', html)
         fp.write_text(html)
         print(f"  {p}: added Areas nav link")
 
