@@ -60,4 +60,18 @@ Navy `#333B60`, crimson `#BC1E2C`, silver `#B4B8C6`. Fonts: Clash Display + Swit
 Push this folder's repo to GitHub and connect a host (Cloudflare Pages / Netlify /
 GitHub Pages). Pushes auto-deploy. Keep edits local until approved, then push.
 
+Hosted on **Cloudflare Workers** (static assets, see `wrangler.toml`); pushes to
+`main` auto-build via Workers Builds (`npx wrangler deploy`).
+
+### SEO / canonicalization notes
+- Internal links, canonicals, and the sitemap all use **clean, extensionless
+  URLs** (`/services`, not `/services.html`). Cloudflare 307-redirects the
+  `.html`, trailing-slash, and `index` forms to the clean URL.
+- **www → apex is handled by a Cloudflare Redirect Rule** (dashboard → the
+  `arismobiledetailing.com` zone → Rules → Redirect Rules), *not* in this repo:
+  wildcard `https://www.*` → `https://${1}`, 301. Workers Assets `_redirects`
+  can't do hostname redirects (relative URLs only), so it must live in the
+  dashboard. Without it, www serves duplicate 200s and Search Console flags
+  pages as "Alternate page with proper canonical tag."
+
 Contact: (402) 515-9157 · Instagram @aris_mobile_detailing
