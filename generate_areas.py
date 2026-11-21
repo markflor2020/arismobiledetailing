@@ -6,57 +6,17 @@ Creates:
   - detailing-<slug>.html    (one landing page per city)
 
 Also patches the existing top-level pages to add an "Areas" nav link.
-Re-run any time to regenerate. Output is plain static HTML.
+Edit city copy in area_content.py, then re-run. Output is plain static HTML.
 """
 import re
+import html
 import pathlib
 
 ROOT = pathlib.Path(__file__).parent
 PHONE = "+14025159157"
 
-# (City, slug, hero blurb, second paragraph, nearby areas string)
-CITIES = [
-    ("Omaha", "omaha",
-     "From Dundee and Benson to Aksarben and West Omaha, we bring the full detailing shop to your driveway — no need to fight traffic or lose your Saturday.",
-     "As a locally owned Omaha business, we know the city's roads chew up paint with salt in winter and dust all summer. We come to your home or office anywhere in town and restore that showroom shine on the spot.",
-     "Midtown, Dundee, Benson, Aksarben and West Omaha"),
-    ("Bellevue", "bellevue",
-     "Mobile auto detailing for Bellevue families and Offutt-area drivers — we come to you, so a busy schedule never means a dirty car.",
-     "Whether you're near Fontenelle Forest, Twin Creek, or out by the base, we arrive fully equipped and detail your vehicle right where it's parked.",
-     "Twin Creek, Fontenelle Forest and the Offutt AFB area"),
-    ("Papillion", "papillion",
-     "Papillion is one of the best places to live in Nebraska — and we help keep its driveways spotless with detailing that comes to you.",
-     "From Shadow Lake to Midlands, we bring professional interior and exterior detailing to your home so your ride always looks its best.",
-     "Shadow Lake, Midlands and Halleck Park"),
-    ("La Vista", "la-vista",
-     "Mobile detailing across La Vista — from City Centre to Central Park — done in your own driveway while you get on with your day.",
-     "No drop-off, no waiting room. We pull up with everything we need and leave your vehicle looking better than the day you bought it.",
-     "La Vista City Centre, Central Park and Southport"),
-    ("Elkhorn", "elkhorn",
-     "West-metro Elkhorn detailing at your home or office — premium results without driving across town.",
-     "Indian Creek, The Ridges, and the surrounding neighborhoods trust us for swirl-free paint, fresh interiors, and long-lasting protection.",
-     "Indian Creek, The Ridges and Skyline Ranches"),
-    ("Gretna", "gretna",
-     "Fast-growing Gretna gets the same showroom finish without leaving home — we bring the detailing studio to your driveway.",
-     "Near Nebraska Crossing, Remington, or Tributary, our fully mobile setup means a flawless detail with zero hassle for you.",
-     "Nebraska Crossing, Remington and Tributary"),
-    ("Bennington", "bennington",
-     "Bennington and the northwest metro — detailed in your driveway with a self-contained setup that needs nothing from you.",
-     "From Newport Landing to the Lake Cunningham area, we deliver deep interior cleans, exterior decontamination, and protection that lasts.",
-     "Newport Landing and the Lake Cunningham area"),
-    ("Ralston", "ralston",
-     "Ralston's tight-knit community gets full-service detailing brought right to the door — convenient, insured, and eco-friendly.",
-     "Near the Ralston Arena or anywhere in town, we treat every vehicle like our own and don't call it done until you're grinning.",
-     "the Ralston Arena and Hinge Park"),
-    ("Millard", "millard",
-     "Southwest Omaha's Millard — Mannheim, Cimarron, and beyond — gets premium mobile detailing at home or the office.",
-     "Skip the line at the car wash. We bring pro-grade tools and premium products to your driveway and restore that deep, even shine.",
-     "Mannheim, Cimarron and Montclair"),
-    ("Yutan", "yutan",
-     "We proudly serve Yutan and the Saunders County area with rural-friendly mobile detailing that travels to you.",
-     "Out-of-the-way driveways are no problem — our setup is fully self-contained, so distance never gets between your vehicle and a spotless finish.",
-     "Yutan and the wider Saunders County area"),
-]
+# Per-city copy (intro, local cards, FAQ, meta description) lives in area_content.py.
+from area_content import CITIES, REVIEWS
 
 NAV_ITEMS = [
     ("Home", "/"),
@@ -95,8 +55,8 @@ def footer_nav():
 
 def footer_areas():
     links = "\n".join(
-        f'      <a href="detailing-{slug}">{name}</a>'
-        for name, slug, *_ in CITIES
+        f'      <a href="detailing-{c["slug"]}">{c["name"]}</a>'
+        for c in CITIES
     )
     return f"""  <div class="wrap footer__areas">
     <span class="footer__areas-label">Areas we serve</span>
@@ -196,13 +156,52 @@ def shell(title, desc, body, active):
 """
 
 
-def city_page(name, slug, blurb, blurb2, nearby):
+ICONS = {  # Lucide-style line icons for the local cards
+    "calendar": '<path d="M8 2v4M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/>',
+    "shield": '<path d="M20 13c0 5-3.5 7.5-7.7 9a1 1 0 0 1-.7 0C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.2-2.7a1.2 1.2 0 0 1 1.5 0C14.5 3.8 17 5 19 5a1 1 0 0 1 1 1z"/>',
+    "star": '<path d="M11 2 9 7l-5 .8 3.6 3.5L7 16l4-2 4 2-.6-4.7L18 7.8 13 7z"/>',
+    "pin": '<path d="M20 10c0 5-5.5 10.2-7.4 11.8a1 1 0 0 1-1.2 0C9.5 20.2 4 15 4 10a8 8 0 0 1 16 0"/><circle cx="12" cy="10" r="3"/>',
+    "clock": '<circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/>',
+    "truck": '<path d="M14 18V6a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2v11a1 1 0 0 0 1 1h2"/><path d="M15 18H9"/><path d="M19 18h2a1 1 0 0 0 1-1v-3.65a1 1 0 0 0-.22-.62l-3.48-4.35A1 1 0 0 0 17.52 8H14"/><circle cx="17" cy="18" r="2"/><circle cx="7" cy="18" r="2"/>',
+    "sparkles": '<path d="M9.94 15.5A2 2 0 0 0 8.5 14.06l-6.14-1.58a.5.5 0 0 1 0-.96L8.5 9.94A2 2 0 0 0 9.94 8.5l1.58-6.14a.5.5 0 0 1 .96 0l1.58 6.14a2 2 0 0 0 1.44 1.44l6.14 1.58a.5.5 0 0 1 0 .96l-6.14 1.58a2 2 0 0 0-1.44 1.44l-1.58 6.14a.5.5 0 0 1-.96 0z"/>',
+    "users": '<path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/>',
+    "briefcase": '<rect width="20" height="14" x="2" y="7" rx="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/>',
+    "sun": '<circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/>',
+    "wrench": '<path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/>',
+}
+
+
+def esc(text):
+    """Plain-text copy -> safe HTML (apostrophes left readable)."""
+    return html.escape(text, quote=False)
+
+
+def city_page(c):
+    name, slug = c["name"], c["slug"]
+    names = {x["slug"]: x["name"] for x in CITIES}
+    intro = "\n".join(f"      <p>{esc(p)}</p>" for p in c["intro"])
+    cards = "\n".join(
+        f"""      <div class="why__item reveal" data-d="{i}">
+        <div class="why__icon"><svg viewBox="0 0 24 24" class="ico" aria-hidden="true">{ICONS[icon]}</svg></div>
+        <h3>{esc(title)}</h3>
+        <p>{esc(text)}</p>
+      </div>"""
+        for i, (icon, title, text) in enumerate(c["cards"]))
+    faqs = "\n".join(
+        f"""      <details class="faq__item">
+        <summary>{esc(q)}<span class="faq__plus"></span></summary>
+        <div class="faq__a">{esc(a)}</div>
+      </details>"""
+        for q, a in c["faqs"])
+    nearby_links = ", ".join(f'<a href="detailing-{n}">{names[n]}</a>' for n in c["neighbors"])
+    rv_name, rv_text = REVIEWS[c["review"]]
+
     body = f"""<section class="phero">
   <div class="wrap phero__inner">
     <nav class="crumbs" aria-label="Breadcrumb"><a href="/">Home</a><a href="areas">Areas</a><span>{name}</span></nav>
     <span class="eyebrow reveal" data-d="0">Service area</span>
     <h1 class="phero__title reveal" data-d="1">Mobile Auto Detailing in {name}, NE</h1>
-    <p class="phero__sub reveal" data-d="2">{blurb}</p>
+    <p class="phero__sub reveal" data-d="2">{esc(c["hero"])}</p>
   </div>
 </section>
 
@@ -212,8 +211,8 @@ def city_page(name, slug, blurb, blurb2, nearby):
     <div class="area__text reveal">
       <span class="eyebrow">We come to you</span>
       <h2 class="sec-title">Detailing that comes to {name}.</h2>
-      <p>{blurb2}</p>
-      <p>Every detail is performed right in your driveway with a fully self-contained setup — no water or power hookups needed. Proudly serving {name} and nearby {nearby}.</p>
+{intro}
+      <p>Proudly serving {name} and nearby {esc(c["nearby"])}.</p>
       <div class="about__points">
         <span>{CHECK}100% mobile — we travel to {name}</span>
         <span>{CHECK}Fully insured &amp; eco-friendly products</span>
@@ -236,7 +235,21 @@ def city_page(name, slug, blurb, blurb2, nearby):
   </div>
 </section>
 
-<section class="section reviews">
+<section class="section why">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div>
+        <span class="eyebrow">Local know-how</span>
+        <h2 class="sec-title">Made for {name} drivers.</h2>
+      </div>
+    </div>
+    <div class="why__grid">
+{cards}
+    </div>
+  </div>
+</section>
+
+<section class="section section--alt reviews">
   <div class="wrap reviews__grid">
     <div class="reviews__summary reveal">
       <span class="eyebrow">Trusted locally</span>
@@ -247,9 +260,22 @@ def city_page(name, slug, blurb, blurb2, nearby):
     </div>
     <figure class="quote quote--feature reveal" data-d="1">
       <div class="quote__stars" aria-hidden="true">★★★★★</div>
-      <blockquote>I highly recommend this mobile detailing service! They did an excellent job cleaning up my van and you can tell they take real pride in their work. Ari was very meticulous about our van especially since I have small children, he did everything exactly the way we asked. They were professional, thorough, flexible with our timing, and their prices were excellent. It’s not often you find a service that checks every box, but they definitely did. The van looks fantastic, and we’ll absolutely be using them again!</blockquote>
-      <figcaption><strong>Nadia Dix</strong><span>Google review</span></figcaption>
+      <blockquote>{esc(rv_text)}</blockquote>
+      <figcaption><strong>{esc(rv_name)}</strong><span>Google review</span></figcaption>
     </figure>
+  </div>
+</section>
+
+<section class="section faq">
+  <div class="wrap faq__grid">
+    <div class="faq__intro reveal">
+      <span class="eyebrow">Good to know</span>
+      <h2 class="sec-title">{name} questions, answered.</h2>
+      <p class="sec-sub">Also serving nearby {nearby_links}. Anything else? Text us at <a href="tel:{PHONE}">(402) 515-9157</a>.</p>
+    </div>
+    <div class="faq__list reveal" data-d="1">
+{faqs}
+    </div>
   </div>
 </section>
 
@@ -265,13 +291,13 @@ def city_page(name, slug, blurb, blurb2, nearby):
 </section>
 </main>"""
     title = f"Mobile Auto Detailing in {name}, NE — Ari's Mobile Detailing"
-    desc = f"Mobile auto detailing in {name}, NE. Interior & exterior detailing, ceramic coating, paint correction & maintenance plans — done at your home or office. Quote within the hour."
-    return shell(title, desc, body, "areas")
+    return shell(title, html.escape(c["desc"]), body, "areas")
 
 
 def hub_page():
     cards = []
-    for name, slug, blurb, *_ in CITIES:
+    for c in CITIES:
+        name, slug, blurb = c["name"], c["slug"], esc(c["hero"])
         cards.append(f"""      <a class="area-card spotlight reveal" href="detailing-{slug}">
         <h3>{name}, NE</h3>
         <p>{blurb}</p>
@@ -353,9 +379,9 @@ def main():
     print("Generating area pages:")
     (ROOT / "areas.html").write_text(hub_page())
     print("  areas.html (hub)")
-    for name, slug, blurb, blurb2, nearby in CITIES:
-        (ROOT / f"detailing-{slug}.html").write_text(city_page(name, slug, blurb, blurb2, nearby))
-        print(f"  detailing-{slug}.html ({name})")
+    for c in CITIES:
+        (ROOT / f"detailing-{c['slug']}.html").write_text(city_page(c))
+        print(f"  detailing-{c['slug']}.html ({c['name']})")
     # re-apply SEO tags + rebuild sitemap so regenerated pages stay optimized
     seo_py = ROOT / "seo.py"
     if seo_py.exists():

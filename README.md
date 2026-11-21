@@ -20,8 +20,11 @@ python3 serve.py 8080
 - `styles.css` — all styles (CSS variables at top)
 - `script.js` — nav drawer, scroll reveals, before/after slider, quote form
 - `assets/` — logo + photos
-- `generate_areas.py` — regenerates the area pages and keeps the "Areas" nav/footer
-  links in sync. Edit city blurbs there and re-run: `python3 generate_areas.py`
+- `area_content.py` — the copy for each city page (intro, local cards, FAQ, meta
+  description, featured review, nearby-city links). Keep each city genuinely
+  different — near-duplicate city pages get skipped by Google.
+- `generate_areas.py` — rebuilds the area pages from `area_content.py` and keeps the
+  "Areas" nav/footer links in sync: `python3 generate_areas.py`
   (it runs `seo.py` automatically afterward).
 - `seo.py` — injects canonical/OG/Twitter/geo meta + LocalBusiness JSON-LD into
   every page and writes `sitemap.xml` + `robots.txt`. Idempotent; re-run any time.
