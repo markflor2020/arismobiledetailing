@@ -11,6 +11,9 @@
 *.swp
 *~
 
+# Cloudflare local dev (npx wrangler dev)
+.wrangler/
+
 # Logs & temp
 *.log
 tmp/

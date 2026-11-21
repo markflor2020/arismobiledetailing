@@ -63,6 +63,24 @@ GitHub Pages). Pushes auto-deploy. Keep edits local until approved, then push.
 Hosted on **Cloudflare Workers** (static assets, see `wrangler.toml`); pushes to
 `main` auto-build via Workers Builds (`npx wrangler deploy`).
 
+### Photos (keep the site fast)
+Pages never load the original JPGs (except the hero JPG, used as the social-share
+image). Every photo has responsive WebP copies (`name-480.webp`, `name-960.webp`, …).
+To add or replace a photo:
+1. Drop the JPG/PNG in `assets/img/` (use a **new filename** when replacing — photos
+   are cached for 30 days, see `_headers`).
+2. Run `python3 optimize_images.py` (needs Pillow) to build the WebP sizes.
+3. Reference it like the existing ones: `src="…-960.webp"` + `srcset` listing every
+   size + a `sizes` hint matching the layout, plus `width`/`height` and
+   `loading="lazy" decoding="async"` (except anything visible on first load).
+Before/after slider tabs use `data-before`/`data-after` = the `-960.webp` path;
+`script.js` derives the 480w version.
+
+### Headers
+`_headers` sets security headers on every response and cache lifetimes (photos/fonts
+30 days, CSS/JS 1 hour). Preview it exactly as Cloudflare serves it with
+`npx wrangler dev` (also catches a bad `_headers` file before it can fail a deploy).
+
 ### SEO / canonicalization notes
 - Internal links, canonicals, and the sitemap all use **clean, extensionless
   URLs** (`/services`, not `/services.html`). Cloudflare 307-redirects the

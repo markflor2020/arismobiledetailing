@@ -7,6 +7,7 @@
 <meta name="description" content="Showroom-quality mobile auto detailing delivered to your driveway in Omaha & the metro. Ceramic coating, paint correction, interior & exterior detailing. Quote within the hour." />
 <meta name="author" content="Ari's Mobile Detailing" />
 <link rel="icon" href="assets/logo.svg" />
+<link rel="preload" as="image" href="assets/img/hero-corvette-960.webp" imagesrcset="assets/img/hero-corvette-640.webp 640w, assets/img/hero-corvette-960.webp 960w, assets/img/hero-corvette-1238.webp 1238w" imagesizes="100vw" fetchpriority="high" />
 <link rel="stylesheet" href="styles.css" />
 <!-- SEO:start (managed by seo.py) -->
 <link rel="canonical" href="https://arismobiledetailing.com/" />
@@ -25,7 +26,7 @@
 <meta name="twitter:title" content="Ari's Mobile Detailing — Mobile Auto Detailing in Omaha, NE" />
 <meta name="twitter:description" content="Showroom-quality mobile auto detailing delivered to your driveway in Omaha & the metro. Ceramic coating, paint correction, interior & exterior detailing. Quote within the hour." />
 <meta name="twitter:image" content="https://arismobiledetailing.com/assets/img/hero-corvette.jpg" />
-<script type="application/ld+json" id="ld-business">{"@context":"https://schema.org","@type":"AutoWash","name":"Ari's Mobile Detailing","image":"https://arismobiledetailing.com/assets/img/hero-corvette.jpg","url":"https://arismobiledetailing.com/","telephone":"+1-402-515-9157","priceRange":"$$","description":"Mobile auto detailing serving Omaha, NE and the metro. Interior & exterior detailing, ceramic coating, paint correction and maintenance plans, performed at your home or office.","address":{"@type":"PostalAddress","addressLocality":"Omaha","addressRegion":"NE","addressCountry":"US"},"geo":{"@type":"GeoCoordinates","latitude":41.2565,"longitude":-95.9345},"areaServed":[{"@type":"City","name":"Omaha, NE"}, {"@type":"City","name":"Bellevue, NE"}, {"@type":"City","name":"Papillion, NE"}, {"@type":"City","name":"La Vista, NE"}, {"@type":"City","name":"Elkhorn, NE"}, {"@type":"City","name":"Gretna, NE"}, {"@type":"City","name":"Bennington, NE"}, {"@type":"City","name":"Ralston, NE"}, {"@type":"City","name":"Millard, NE"}, {"@type":"City","name":"Yutan, NE"}],"sameAs":["https://www.instagram.com/aris_mobile_detailing/","https://www.facebook.com/p/Aris-Mobile-Detailing-100068821100332/"],"openingHoursSpecification":[{"@type":"OpeningHoursSpecification","dayOfWeek":["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"],"opens":"08:00","closes":"18:00"}],"aggregateRating":{"@type":"AggregateRating","ratingValue":"5.0","reviewCount":"4","bestRating":"5"},"review":[{"@type":"Review","author":{"@type":"Person","name":"Cody Buscher"},"reviewRating":{"@type":"Rating","ratingValue":"5","bestRating":"5"},"reviewBody":"Our Explorer carries around 4 kids under the age of 7 on a daily basis and Ari makes it look like new every time he shows up. Always on time, great attitude and customer service and always has a smile on his face. Great pricing and outstanding work."}, {"@type":"Review","author":{"@type":"Person","name":"Gavrella Buscher"},"reviewRating":{"@type":"Rating","ratingValue":"5","bestRating":"5"},"reviewBody":"If you need your car detailed, 10/10 recommend Ari's Mobile Detailing!! So convenient, didn't even have to leave our house! Reasonably priced and had it done fast!"}, {"@type":"Review","author":{"@type":"Person","name":"Meghan Mendick"},"reviewRating":{"@type":"Rating","ratingValue":"5","bestRating":"5"},"reviewBody":"I have 3 kids, a dog, and a VERY HAIRY dog. Ari did such an amazing job getting all the food, hair, and smells out of everything!!!"}, {"@type":"Review","author":{"@type":"Person","name":"Taylor Spurgeon"},"reviewRating":{"@type":"Rating","ratingValue":"5","bestRating":"5"},"reviewBody":"Absolutely amazing work!!!"}]}</script>
+<script type="application/ld+json" id="ld-business">{"@context":"https://schema.org","@type":"AutoWash","name":"Ari's Mobile Detailing","image":"https://arismobiledetailing.com/assets/img/hero-corvette.jpg","url":"https://arismobiledetailing.com/","telephone":"+1-402-515-9157","priceRange":"$$","description":"Mobile auto detailing serving Omaha, NE and the metro. Interior & exterior detailing, ceramic coating, paint correction and maintenance plans, performed at your home or office.","address":{"@type":"PostalAddress","addressLocality":"Omaha","addressRegion":"NE","addressCountry":"US"},"geo":{"@type":"GeoCoordinates","latitude":41.2565,"longitude":-95.9345},"areaServed":[{"@type":"City","name":"Omaha, NE"}, {"@type":"City","name":"Bellevue, NE"}, {"@type":"City","name":"Papillion, NE"}, {"@type":"City","name":"La Vista, NE"}, {"@type":"City","name":"Elkhorn, NE"}, {"@type":"City","name":"Gretna, NE"}, {"@type":"City","name":"Bennington, NE"}, {"@type":"City","name":"Ralston, NE"}, {"@type":"City","name":"Millard, NE"}, {"@type":"City","name":"Yutan, NE"}],"sameAs":["https://www.instagram.com/aris_mobile_detailing/","https://www.facebook.com/p/Aris-Mobile-Detailing-100068821100332/","https://maps.google.com/?cid=3803131310200738101"],"openingHoursSpecification":[{"@type":"OpeningHoursSpecification","dayOfWeek":["Monday","Tuesday","Wednesday","Thursday","Friday"],"opens":"08:00","closes":"17:00"},{"@type":"OpeningHoursSpecification","dayOfWeek":"Saturday","opens":"07:00","closes":"15:00"}]}</script>
 <!-- SEO:end -->
 </head>
 <body data-page="home">
@@ -53,7 +54,7 @@
 <!-- ============ HEADER ============ -->
 <header class="header" id="top">
   <div class="wrap header__inner">
-    <a class="brand" href="/" aria-label="Ari's Mobile Detailing — home">
+    <a class="brand" href="/">
       <span class="brand__medallion"><img src="assets/logo.svg" alt="" width="44" height="44" /></span>
       <span class="brand__name">
         <span class="brand__line1">Ari's <em>Mobile</em></span>
@@ -86,7 +87,7 @@
 </header>
 
 <!-- mobile drawer -->
-<div class="drawer" id="drawer" aria-hidden="true">
+<div class="drawer" id="drawer" aria-hidden="true" inert>
   <nav class="drawer__nav" aria-label="Mobile">
     <a href="/" class="is-active">Home</a>
     <a href="services">Services</a>
@@ -106,7 +107,7 @@
 <!-- ============ HERO ============ -->
 <section class="hero">
   <div class="hero__media">
-    <img src="assets/img/hero-corvette.jpg" alt="Ari's Mobile Detailing washing a Corvette at a customer's home in Omaha" />
+    <img src="assets/img/hero-corvette-960.webp" srcset="assets/img/hero-corvette-640.webp 640w, assets/img/hero-corvette-960.webp 960w, assets/img/hero-corvette-1238.webp 1238w" sizes="100vw" width="1238" height="1920" alt="Ari's Mobile Detailing washing a Corvette at a customer's home in Omaha" fetchpriority="high" />
     <div class="hero__scrim"></div>
     <div class="hero__vignette"></div>
   </div>
@@ -145,10 +146,10 @@
       </div>
     </div>
 
-    <aside class="hero__rating reveal" data-d="4" aria-label="5.0 star rating, verified">
+    <aside class="hero__rating reveal" data-d="4" aria-label="Rated 5.0 stars on Google from 30+ reviews">
       <div class="hero__rating-num">5.0</div>
       <div class="hero__stars" aria-hidden="true">★★★★★</div>
-      <div class="hero__rating-cap">Verified&nbsp;·&nbsp;5★ on Facebook</div>
+      <div class="hero__rating-cap">30+ reviews&nbsp;·&nbsp;Google</div>
     </aside>
   </div>
 </section>
@@ -209,32 +210,32 @@
 
     <div class="cards">
       <a class="card spotlight reveal" data-d="0" href="services">
-        <div class="card__img"><img src="assets/img/service-exterior.jpg" alt="Exterior detailing on a Mustang" loading="lazy" /></div>
+        <div class="card__img"><img src="assets/img/service-exterior-960.webp" srcset="assets/img/service-exterior-480.webp 480w, assets/img/service-exterior-960.webp 960w" sizes="(min-width: 981px) 370px, (min-width: 721px) 46vw, 92vw" width="960" height="1280" alt="Exterior detailing on a Mustang" loading="lazy" decoding="async" /></div>
         <div class="card__body"><span class="card__tag">Exterior</span><h3>Exterior Detailing</h3>
           <p>Hand wash, decontamination, clay-bar, and a hand-applied wax that brings paint back to life.</p></div>
       </a>
       <a class="card spotlight reveal" data-d="1" href="services">
-        <div class="card__img"><img src="assets/img/service-interior.jpg" alt="Interior detailing of a cabin" loading="lazy" /></div>
+        <div class="card__img"><img src="assets/img/service-interior-960.webp" srcset="assets/img/service-interior-480.webp 480w, assets/img/service-interior-960.webp 960w" sizes="(min-width: 981px) 370px, (min-width: 721px) 46vw, 92vw" width="960" height="1280" alt="Interior detailing of a cabin" loading="lazy" decoding="async" /></div>
         <div class="card__body"><span class="card__tag">Interior</span><h3>Interior Detailing</h3>
           <p>Deep extraction, leather conditioning, dash restoration, and an odor-neutralizing finish.</p></div>
       </a>
       <a class="card spotlight reveal" data-d="2" href="services">
-        <div class="card__img"><img src="assets/img/service-full.jpg" alt="Full detail package — Audi R8" loading="lazy" /></div>
+        <div class="card__img"><img src="assets/img/service-full-960.webp" srcset="assets/img/service-full-480.webp 480w, assets/img/service-full-960.webp 960w" sizes="(min-width: 981px) 370px, (min-width: 721px) 46vw, 92vw" width="960" height="1280" alt="Full detail package — Audi R8" loading="lazy" decoding="async" /></div>
         <div class="card__body"><span class="card__tag">Most popular</span><h3>Full Detail Package</h3>
           <p>The complete reset — interior deep clean, exterior decontamination, and paint enhancement.</p></div>
       </a>
       <a class="card spotlight reveal" data-d="0" href="services">
-        <div class="card__img"><img src="assets/img/service-ceramic.jpg" alt="Ceramic coating on an Infiniti" loading="lazy" /></div>
+        <div class="card__img"><img src="assets/img/service-ceramic-960.webp" srcset="assets/img/service-ceramic-480.webp 480w, assets/img/service-ceramic-960.webp 960w" sizes="(min-width: 981px) 370px, (min-width: 721px) 46vw, 92vw" width="960" height="1280" alt="Ceramic coating on an Infiniti" loading="lazy" decoding="async" /></div>
         <div class="card__body"><span class="card__tag">Protection</span><h3>Ceramic Coating</h3>
           <p>Multi-year hydrophobic protection with a slick, mirror-deep finish that repels everything.</p></div>
       </a>
       <a class="card spotlight reveal" data-d="1" href="services">
-        <div class="card__img"><img src="assets/img/service-paint.jpg" alt="Paint correction machine polishing" loading="lazy" /></div>
+        <div class="card__img"><img src="assets/img/service-paint-960.webp" srcset="assets/img/service-paint-640.webp 640w, assets/img/service-paint-960.webp 960w, assets/img/service-paint-1280.webp 1280w" sizes="(min-width: 981px) 370px, (min-width: 721px) 46vw, 92vw" width="1280" height="720" alt="Paint correction machine polishing" loading="lazy" decoding="async" /></div>
         <div class="card__body"><span class="card__tag">Correction</span><h3>Paint Correction</h3>
           <p>Multi-stage polishing removes swirls, scratches, and oxidation for a glass-like reflection.</p></div>
       </a>
       <a class="card spotlight reveal" data-d="2" href="services">
-        <div class="card__img"><img src="assets/img/service-engine.jpg" alt="Engine bay detailing on a Ram" loading="lazy" /></div>
+        <div class="card__img"><img src="assets/img/service-engine-960.webp" srcset="assets/img/service-engine-480.webp 480w, assets/img/service-engine-960.webp 960w" sizes="(min-width: 981px) 370px, (min-width: 721px) 46vw, 92vw" width="960" height="1280" alt="Engine bay detailing on a Ram" loading="lazy" decoding="async" /></div>
         <div class="card__body"><span class="card__tag">Under the hood</span><h3>Engine Bay Detailing</h3>
           <p>Safe, thorough cleaning and dressing so under the hood looks as showroom-ready as the rest.</p></div>
       </a>
@@ -253,10 +254,10 @@
 
     <div class="ba-showcase reveal">
       <div class="ba" id="ba">
-        <img class="ba__img ba__after" id="baAfter" src="assets/img/ba-truck-after.jpg" alt="After detailing" draggable="false" />
+        <img class="ba__img ba__after" id="baAfter" src="assets/img/ba-truck-after-960.webp" srcset="assets/img/ba-truck-after-480.webp 480w, assets/img/ba-truck-after-960.webp 960w" sizes="(min-width: 981px) 430px, (min-width: 721px) 520px, 92vw" width="960" height="1280" alt="After detailing" draggable="false" loading="lazy" decoding="async" />
         <span class="ba__label ba__label--after">After</span>
         <div class="ba__before" id="baBefore">
-          <img class="ba__img" id="baBeforeImg" src="assets/img/ba-truck-before.jpg" alt="Before detailing" draggable="false" />
+          <img class="ba__img" id="baBeforeImg" src="assets/img/ba-truck-before-960.webp" srcset="assets/img/ba-truck-before-480.webp 480w, assets/img/ba-truck-before-960.webp 960w" sizes="(min-width: 981px) 430px, (min-width: 721px) 520px, 92vw" width="960" height="1280" alt="Before detailing" draggable="false" loading="lazy" decoding="async" />
           <span class="ba__label ba__label--before">Before</span>
         </div>
         <div class="ba__handle" id="baHandle">
@@ -268,19 +269,19 @@
       </div>
 
       <div class="ba-tabs" id="baTabs" role="tablist" aria-label="Choose a before and after">
-        <button class="ba-tab is-active" role="tab" aria-selected="true" data-before="assets/img/ba-truck-before.jpg" data-after="assets/img/ba-truck-after.jpg">
+        <button class="ba-tab is-active" role="tab" aria-selected="true" data-before="assets/img/ba-truck-before-960.webp" data-after="assets/img/ba-truck-after-960.webp">
           <span class="ba-tab__k">01</span><span class="ba-tab__t">Truck exterior</span><span class="ba-tab__s">Salt &amp; grime wash-off</span>
         </button>
-        <button class="ba-tab" role="tab" aria-selected="false" data-before="assets/img/ba-bmw-before.jpg" data-after="assets/img/ba-bmw-after.jpg">
+        <button class="ba-tab" role="tab" aria-selected="false" data-before="assets/img/ba-bmw-before-960.webp" data-after="assets/img/ba-bmw-after-960.webp">
           <span class="ba-tab__k">02</span><span class="ba-tab__t">BMW interior</span><span class="ba-tab__s">Deep extraction &amp; shampoo</span>
         </button>
-        <button class="ba-tab" role="tab" aria-selected="false" data-before="assets/img/ba-headlight-before.jpg" data-after="assets/img/ba-headlight-after.jpg">
+        <button class="ba-tab" role="tab" aria-selected="false" data-before="assets/img/ba-headlight-before-960.webp" data-after="assets/img/ba-headlight-after-960.webp">
           <span class="ba-tab__k">03</span><span class="ba-tab__t">Headlight restore</span><span class="ba-tab__s">Cleared up &amp; sealed</span>
         </button>
-        <button class="ba-tab" role="tab" aria-selected="false" data-before="assets/img/ba-engine-before.jpg" data-after="assets/img/ba-engine-after.jpg">
+        <button class="ba-tab" role="tab" aria-selected="false" data-before="assets/img/ba-engine-before-960.webp" data-after="assets/img/ba-engine-after-960.webp">
           <span class="ba-tab__k">04</span><span class="ba-tab__t">Engine bay</span><span class="ba-tab__s">Degreased &amp; dressed</span>
         </button>
-        <button class="ba-tab" role="tab" aria-selected="false" data-before="assets/img/ba-subaru-before.jpg" data-after="assets/img/ba-subaru-after.jpg">
+        <button class="ba-tab" role="tab" aria-selected="false" data-before="assets/img/ba-subaru-before-960.webp" data-after="assets/img/ba-subaru-after-960.webp">
           <span class="ba-tab__k">05</span><span class="ba-tab__t">Subaru headlights</span><span class="ba-tab__s">Oxidation removed</span>
         </button>
       </div>
@@ -333,7 +334,7 @@
 
     <div class="teasers">
       <a class="teaser spotlight reveal" data-d="0" href="packages">
-        <div class="teaser__img"><img src="assets/img/service-full.jpg" alt="Detailing packages" loading="lazy" /></div>
+        <div class="teaser__img"><img src="assets/img/service-full-960.webp" srcset="assets/img/service-full-480.webp 480w, assets/img/service-full-960.webp 960w" sizes="(min-width: 981px) 570px, 92vw" width="960" height="1280" alt="Detailing packages" loading="lazy" decoding="async" /></div>
         <div class="teaser__body">
           <span class="teaser__from">Detailing packages from</span>
           <span class="teaser__price">$180</span>
@@ -345,7 +346,7 @@
         </div>
       </a>
       <a class="teaser spotlight reveal" data-d="1" href="packages#maintenance">
-        <div class="teaser__img"><img src="assets/img/service-exterior.jpg" alt="Maintenance plans" loading="lazy" /></div>
+        <div class="teaser__img"><img src="assets/img/service-exterior-960.webp" srcset="assets/img/service-exterior-480.webp 480w, assets/img/service-exterior-960.webp 960w" sizes="(min-width: 981px) 570px, 92vw" width="960" height="1280" alt="Maintenance plans" loading="lazy" decoding="async" /></div>
         <div class="teaser__body">
           <span class="teaser__from">Maintenance plans from</span>
           <span class="teaser__price">$30<small>/wash</small></span>
@@ -368,7 +369,7 @@
         <span class="eyebrow">What customers say</span>
         <div class="reviews__score">5.0</div>
         <div class="reviews__stars" aria-hidden="true">★★★★★</div>
-        <p class="reviews__meta">Rated 5.0 from real Facebook recommendations.</p>
+        <p class="reviews__meta">Rated 5.0 on Google from 30+ local reviews.</p>
         <a class="btn btn--ghost" href="reviews">Read the reviews
           <svg viewBox="0 0 24 24" class="ico" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
         </a>
@@ -376,26 +377,26 @@
 
       <figure class="quote quote--feature reveal" data-d="1">
         <div class="quote__stars" aria-hidden="true">★★★★★</div>
-        <blockquote>Our Explorer carries around 4 kids under the age of 7 on a daily basis and Ari makes it look like new every time he shows up. Always on time, great attitude and customer service and always has a smile on his face. Great pricing and outstanding work.</blockquote>
-        <figcaption><strong>Cody Buscher</strong><span>Facebook recommendation · Jul 2024</span></figcaption>
+        <blockquote>I highly recommend this mobile detailing service! They did an excellent job cleaning up my van and you can tell they take real pride in their work. Ari was very meticulous about our van especially since I have small children, he did everything exactly the way we asked. They were professional, thorough, flexible with our timing, and their prices were excellent. It’s not often you find a service that checks every box, but they definitely did. The van looks fantastic, and we’ll absolutely be using them again!</blockquote>
+        <figcaption><strong>Nadia Dix</strong><span>Google review</span></figcaption>
       </figure>
     </div>
 
     <div class="quotes">
       <figure class="quote quote--card spotlight reveal" data-d="0">
         <div class="quote__stars" aria-hidden="true">★★★★★</div>
-        <blockquote>If you need your car detailed, 10/10 recommend Ari's Mobile Detailing!! So convenient, didn't even have to leave our house! Reasonably priced and had it done fast!</blockquote>
-        <figcaption><strong>Gavrella Buscher</strong><span>Facebook recommendation</span></figcaption>
+        <blockquote>I chose Arian as my detailer Because I saw a lot of people trusted him with their vehicles and always like the outcome, now that I’ve been a client of his for over a year, I can confidently say he’s a master of his craft! I work construction, and my truck is always dirty and Arian always comes in clutch and brings my truck back to life. Very friendly guy he’s easy to communicate with making my overall experience a 10/10</blockquote>
+        <figcaption><strong>Miguel Espinoza</strong><span>Google review</span></figcaption>
       </figure>
       <figure class="quote quote--card spotlight reveal" data-d="1">
         <div class="quote__stars" aria-hidden="true">★★★★★</div>
-        <blockquote>I have 3 kids, a dog, and a VERY HAIRY dog. Ari did such an amazing job getting all the food, hair, and smells out of everything!!!</blockquote>
-        <figcaption><strong>Meghan Mendick</strong><span>Facebook recommendation · Sep 2023</span></figcaption>
+        <blockquote>Before Ari arrived my vehicles had enough food stored in the crevices to survive a zombie apocalypse and pet hair to sew an afghan. Rather than screaming and running away, Ari did a fantastic job - polite, professional, and so nice to be able to get everything done while I’m working.</blockquote>
+        <figcaption><strong>Lindy Kyzer</strong><span>Google review</span></figcaption>
       </figure>
       <figure class="quote quote--card spotlight reveal" data-d="2">
         <div class="quote__stars" aria-hidden="true">★★★★★</div>
-        <blockquote>Absolutely amazing work!!!</blockquote>
-        <figcaption><strong>Taylor Spurgeon</strong><span>Facebook recommendation</span></figcaption>
+        <blockquote>Ari provided the best detail that I’ve gotten. My family and I all got our cars detailed, some of them looking a disaster, and he made them all look pristine and new. The service was amazing and he was very professional, commutative, and reliable throughout the entire process. I would highly recommend Ari’s Detailing to anyone!</blockquote>
+        <figcaption><strong>Ben Craig</strong><span>Google review</span></figcaption>
       </figure>
     </div>
   </div>
@@ -405,7 +406,7 @@
 <section class="section about">
   <div class="wrap about__grid">
     <div class="about__media reveal">
-      <img src="assets/img/service-full.jpg" alt="A freshly detailed vehicle" loading="lazy" />
+      <img src="assets/img/service-full-960.webp" srcset="assets/img/service-full-480.webp 480w, assets/img/service-full-960.webp 960w" sizes="(min-width: 981px) 540px, 92vw" width="960" height="1280" alt="A freshly detailed vehicle" loading="lazy" decoding="async" />
       <div class="about__stat">
         <strong>100%</strong>
         <span>Mobile &amp; insured</span>

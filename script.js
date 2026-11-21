@@ -22,6 +22,7 @@
     var isOpen = open === undefined ? !drawer.classList.contains("open") : open;
     drawer.classList.toggle("open", isOpen);
     drawer.setAttribute("aria-hidden", String(!isOpen));
+    drawer.inert = !isOpen; // closed menu links can't be tabbed to or read out
     burger.setAttribute("aria-expanded", String(isOpen));
     document.body.style.overflow = isOpen ? "hidden" : "";
   };
@@ -100,18 +101,24 @@
     var tabs = document.querySelectorAll("#baTabs .ba-tab");
     var countEl = document.querySelector(".ba-count");
     if (countEl) countEl.textContent = String(tabs.length);
+    // data-before/data-after hold the 960w WebP; a 480w sibling exists for phones
+    var setSrc = function (img, src) {
+      img.srcset = src.replace("-960.webp", "-480.webp") + " 480w, " + src + " 960w";
+      img.src = src;
+    };
     var swapTo = function (tab) {
       var b = tab.getAttribute("data-before");
       var a = tab.getAttribute("data-after");
       // preload the new pair, then swap together to avoid a flash of mismatch
       var imgA = new Image();
+      imgA.sizes = afterImg.sizes; // so it fetches the same size the slider will use
       imgA.onload = function () {
-        beforeImg.src = b;
-        afterImg.src = a;
+        setSrc(beforeImg, b);
+        setSrc(afterImg, a);
         setPos(50);
       };
-      imgA.src = a;
-      beforeImg.src = b; // before can load immediately under the clip
+      setSrc(imgA, a);
+      setSrc(beforeImg, b); // before can load immediately under the clip
       tabs.forEach(function (t) {
         var on = t === tab;
         t.classList.toggle("is-active", on);

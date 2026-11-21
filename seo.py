@@ -23,15 +23,13 @@ PHONE = "+1-402-515-9157"
 OG_IMAGE = f"{DOMAIN}/assets/img/hero-corvette.jpg"
 INSTAGRAM = "https://www.instagram.com/aris_mobile_detailing/"
 FACEBOOK = "https://www.facebook.com/p/Aris-Mobile-Detailing-100068821100332/"
+GOOGLE_PROFILE = "https://maps.google.com/?cid=3803131310200738101"   # Google Business Profile
 CITIES = ["Omaha", "Bellevue", "Papillion", "La Vista", "Elkhorn",
           "Gretna", "Bennington", "Ralston", "Millard", "Yutan"]
 
-REVIEWS = [
-    ("Cody Buscher", "Our Explorer carries around 4 kids under the age of 7 on a daily basis and Ari makes it look like new every time he shows up. Always on time, great attitude and customer service and always has a smile on his face. Great pricing and outstanding work."),
-    ("Gavrella Buscher", "If you need your car detailed, 10/10 recommend Ari's Mobile Detailing!! So convenient, didn't even have to leave our house! Reasonably priced and had it done fast!"),
-    ("Meghan Mendick", "I have 3 kids, a dog, and a VERY HAIRY dog. Ari did such an amazing job getting all the food, hair, and smells out of everything!!!"),
-    ("Taylor Spurgeon", "Absolutely amazing work!!!"),
-]
+# No review/aggregateRating markup: the reviews shown on the site are Google reviews,
+# and Google's rules forbid marking up ratings collected on another site (and it
+# doesn't show stars for a business's own reviews anyway).
 
 # sitemap priority / changefreq by page
 PRIORITY = {"index.html": ("1.0", "weekly"), "privacy.html": ("0.2", "yearly")}
@@ -51,18 +49,8 @@ def esc(s):
     return s.replace("&", "&amp;").replace("<", "&lt;").replace(">", "&gt;").replace('"', "&quot;")
 
 
-def jsonld_escape(s):
-    return s.replace("\\", "\\\\").replace('"', '\\"')
-
-
 def local_business_jsonld():
     areas = ", ".join(f'{{"@type":"City","name":"{c}, NE"}}' for c in CITIES)
-    reviews = ", ".join(
-        '{{"@type":"Review","author":{{"@type":"Person","name":"{n}"}},'
-        '"reviewRating":{{"@type":"Rating","ratingValue":"5","bestRating":"5"}},'
-        '"reviewBody":"{b}"}}'.format(n=jsonld_escape(n), b=jsonld_escape(b))
-        for n, b in REVIEWS
-    )
     return (
         '<script type="application/ld+json" id="ld-business">'
         '{'
@@ -76,10 +64,10 @@ def local_business_jsonld():
         '"address":{"@type":"PostalAddress","addressLocality":"Omaha","addressRegion":"NE","addressCountry":"US"},'
         '"geo":{"@type":"GeoCoordinates","latitude":41.2565,"longitude":-95.9345},'
         f'"areaServed":[{areas}],'
-        f'"sameAs":["{INSTAGRAM}","{FACEBOOK}"],'
-        '"openingHoursSpecification":[{"@type":"OpeningHoursSpecification","dayOfWeek":["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"],"opens":"08:00","closes":"18:00"}],'
-        '"aggregateRating":{"@type":"AggregateRating","ratingValue":"5.0","reviewCount":"4","bestRating":"5"},'
-        f'"review":[{reviews}]'
+        f'"sameAs":["{INSTAGRAM}","{FACEBOOK}","{GOOGLE_PROFILE}"],'
+        # hours mirror the Google Business Profile — keep them in sync
+        '"openingHoursSpecification":[{"@type":"OpeningHoursSpecification","dayOfWeek":["Monday","Tuesday","Wednesday","Thursday","Friday"],"opens":"08:00","closes":"17:00"},'
+        '{"@type":"OpeningHoursSpecification","dayOfWeek":"Saturday","opens":"07:00","closes":"15:00"}]'
         '}'
         '</script>'
     )

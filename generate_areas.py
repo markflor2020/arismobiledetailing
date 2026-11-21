@@ -134,7 +134,7 @@ def shell(title, desc, body, active):
 
 <header class="header" id="top">
   <div class="wrap header__inner">
-    <a class="brand" href="/" aria-label="Ari's Mobile Detailing — home">
+    <a class="brand" href="/">
       <span class="brand__medallion"><img src="assets/logo.svg" alt="" width="44" height="44" /></span>
       <span class="brand__name">
         <span class="brand__line1">Ari's <em>Mobile</em></span>
@@ -152,7 +152,7 @@ def shell(title, desc, body, active):
   </div>
 </header>
 
-<div class="drawer" id="drawer" aria-hidden="true">
+<div class="drawer" id="drawer" aria-hidden="true" inert>
   <nav class="drawer__nav" aria-label="Mobile">
 {drawer(active)}
   </nav>
@@ -242,13 +242,13 @@ def city_page(name, slug, blurb, blurb2, nearby):
       <span class="eyebrow">Trusted locally</span>
       <div class="reviews__score">5.0</div>
       <div class="reviews__stars" aria-hidden="true">★★★★★</div>
-      <p class="reviews__meta">Rated 5.0 by drivers across the Omaha metro.</p>
+      <p class="reviews__meta">Rated 5.0 on Google by drivers across the Omaha metro.</p>
       <a class="btn btn--ghost" href="reviews">Read the reviews {ARROW}</a>
     </div>
     <figure class="quote quote--feature reveal" data-d="1">
       <div class="quote__stars" aria-hidden="true">★★★★★</div>
-      <blockquote>Our Explorer carries around 4 kids under the age of 7 on a daily basis and Ari makes it look like new every time he shows up. Always on time, great attitude and customer service and always has a smile on his face. Great pricing and outstanding work.</blockquote>
-      <figcaption><strong>Cody Buscher</strong><span>Facebook recommendation · Jul 2024</span></figcaption>
+      <blockquote>I highly recommend this mobile detailing service! They did an excellent job cleaning up my van and you can tell they take real pride in their work. Ari was very meticulous about our van especially since I have small children, he did everything exactly the way we asked. They were professional, thorough, flexible with our timing, and their prices were excellent. It’s not often you find a service that checks every box, but they definitely did. The van looks fantastic, and we’ll absolutely be using them again!</blockquote>
+      <figcaption><strong>Nadia Dix</strong><span>Google review</span></figcaption>
     </figure>
   </div>
 </section>

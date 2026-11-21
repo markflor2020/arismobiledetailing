@@ -1,0 +1,20 @@
+# Cloudflare static-asset headers (paths are relative — Workers Assets rejects full URLs).
+
+# Security headers on every response.
+/*
+  Strict-Transport-Security: max-age=31536000
+  X-Content-Type-Options: nosniff
+  Referrer-Policy: strict-origin-when-cross-origin
+  X-Frame-Options: DENY
+  Permissions-Policy: camera=(), microphone=(), geolocation=(), payment=(), usb=()
+
+# Photos, fonts, logo: cache 30 days. Filenames aren't fingerprinted, so to replace
+# a photo in place use a NEW filename (or returning visitors may see the old one for a while).
+/assets/*
+  Cache-Control: public, max-age=2592000, stale-while-revalidate=86400
+
+# CSS/JS change with deploys: cache briefly, refresh in the background.
+/styles.css
+  Cache-Control: public, max-age=3600, stale-while-revalidate=86400
+/script.js
+  Cache-Control: public, max-age=3600, stale-while-revalidate=86400
